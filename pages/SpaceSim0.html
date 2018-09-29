@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Spacecraft Simulator Tool</title>
+	<meta name="author" content="The Space Research Company" />
+	<meta name="description" content="Dynamic Spacecraft Design Platform for Analyzing Human Performance " />
+	<meta name="keywords"  content="NASA,human factors,space,spacecraft,astronaut,destign,simulator, simulation, optimize, performance, aerospace" />
+	<meta name="Resource-type" content="Document" />
+
+  <link rel="stylesheet" type="text/css" href="../styles/tsrco.css" />
+	<link rel="stylesheet" type="text/css" href="../styles/jquery.fullPage.css" />
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 24px;
+		/* font-family: arial,helvetica; */
+		color: #262626;
+		margin:0;
+	}
+
+  h2{
+    font-size: 18px;
+    /* font-family: arial,helvetica; */
+    color: #333333;
+    margin:0;
+  }
+
+	.intro p{
+		color: #333333;
+	}
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+    padding-top: 1px !important;
+    margin-left: 50px;
+    margin-right: 25px;
+	}
+
+	/* Overwriting styles for control arrows for slides
+	* --------------------------------------- */
+	/* .controlArrow.prev {
+		left: 50px;
+	}
+	.controlArrow.next{
+		right: 50px;
+	} */
+
+
+	/* Bottom menu
+	* --------------------------------------- */
+	#infoMenu li a {
+		color: #fff;
+	}
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		console.log("scriptin");
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<!-- <script type="application/javascript" src="../scripts/fullpage.offsetSections.min.js"></script> -->
+	<!-- <script type="application/javascript" src="../scripts/jquery.fullpage.extensions.min.js"></script> -->
+
+	<script type="application/javascript" src="../scripts/jquery.fullpage.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				anchors: ['1', '2', '3', '4', '5'],
+				// sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+				navigation: true,
+				navigationPosition: 'left',
+				// paddingBottom: '450px',
+				// offsetSections: true,
+    		// offsetSectionsKey: 'dHNyY28uY29tXzNDVWIyWm1jMlYwVTJWamRHbHZibk09NVVw',
+				// data-percentage="60",
+				// navigationTooltips: ['overview', 'mission', 'spacecraft', 'tasks', 'results']
+
+				onLeave: function(index, nextIndex, direction) {
+
+						// after leaving Introduction
+						if(index == 1) {get_selections();}
+
+						if(index == 2) {get_selections();}
+
+						if(index == 3) {get_selections();}
+
+						if(index == 4) {get_selections();}
+
+						if(index == 5) {get_selections();}
+				}
+			});
+		});
+        // Establish a function that does something.
+				//
+				// jQuery.loadScript1 = function (url, callback) {
+				// 	jQuery.ajax({
+				// 	url: http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js,
+				// 	dataType: 'script',
+				// 	success: callback,
+				// 	async: true
+				// 	});
+				// }
+				//
+				// jQuery.loadScript2 = function (url, callback) {
+				// 	jQuery.ajax({
+				// 	url: http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js,
+				// 	dataType: 'script',
+				// 	success: callback,
+				// 	async: true
+				// 	});
+				// }
+				//
+				// jQuery.loadScript3 = function (src, callback) {
+				// 	jQuery.ajax({
+				// 	src: "../scripts/jquery.fullPage.js",
+				// 	dataType: 'script',
+				// 	success: callback,
+				// 	async: true
+				// 	});
+				// }
+				//
+				//
+				// document.addEventListener("DOMContentLoaded", loadScript1);
+				// document.addEventListener("DOMContentLoaded", loadScript2);
+				// document.addEventListener("DOMContentLoaded", loadScript3);
+				// window.addEventListener("mercury:load", loadScript1);
+				// window.addEventListener("mercury:load", loadScript2);
+				// window.addEventListener("mercury:load", loadScript3);
+	</script>
+</head>
+
+<body>
+
+<div id="fullpage">
+  <div class="section" id="overview" >
+	  <div class="slide" id="slide1">
+		  <div class="intro">
+        <h1>Overview</h1>
+  		  <p>This tool is a demo of our dynamic spacecraft design platform for analyzing human performance. Our goal is to help spacecraft designers quickly create a spacecraft design by optimizing for human factors.</p>
+        <h2>How Does it Work?</h2>
+  		  <p>Simply complete each of the sections navigatable by the buttons on the left to define a mission and design a human spacecraft. Once you have made your selections, you can run a mission and render the results using our model.
+  Additionally, you can customize your mission and design choices throughout this process to see how your specific choices impact the crewmembers’ performance. </p>
+		  </div>
+
+			<button class="button_start" name="button_start" onclick="location.href='#2';"></button><button class="button_more" name="button_more" onclick="location.href='#1/1';"></button>
+
+		</div>
+
+	  <div class="slide" id="slide2">
+      <h2>What is the Purpose?</h2>
+      <p>We strive to enable safe and productive human spaceflight by organizing, analyzing, and sharing knowledge about research in space.</p>
+      <h2>Existing challenges to be solved</h2>
+      <p>1) Finding data linking design choices to human performance.</p>
+      <p>2) Verifying fulfullment of requirements for human spacecraft. </p>
+      <p>3) Connecting different factors that affect human performance. </p>
+      <p>These challenges are tackled through the structure of this preliminary framework, where we sought to gather information and disseminate it in an useful fashion.</p>
+
+			<button class="button_back" name="button_back" onclick="location.href='#1';"></button><button class="button_next" name="button_next" onclick="location.href='#1/2';"></button>
+
+		</div>
+
+    <div class="slide" id="slide3">
+      <h2>Framework Architecture</h2>
+      <p>Complexity increases as you progress through the framework layers. The research layer is a searchable database collection tool that can be used to find related work or
+filter to identify gaps. </p>
+      <p>Design requirements are necessary for spacecraft developers. By connecting requirements to research findings, we aim to help designers understand the constraints,
+        limitations, and reasoning behind each requirement and leverage resources to guide design analysis and evaluation. Linking design choices to measures of human health and performance is a critical yet cumbersome task. Our predictive model and research database currently incorporate a fraction of the factors that affect human performance. Future scientific investigation will allow the model to improve as more data can be collected. </p>
+
+			<button class="button_back" name="button_back" onclick="location.href='#1/1';"></button><button class="button_done" name="button_done" onclick="location.href='#1';"></button>
+
+		</div>
+
+	</div>
+
+	<div class="section" id="mission" data-percentage="url('../assets/" data-centered="false">
+
+		<div class="slide" id="slide1">
+			<div class="intro">
+				<h1>Define Your Mission</h1>
+				<p>This will drive the requirements of your spacecraft.</p>
+				<div id="container_destination">
+					<div id="dest_1"><h2 ALIGN=Centered>Select Destination:</h2></div>
+					<div id="dest_spacer"></div>
+					<div id="dest_2"><button class="button_earth" name="button_earth" onclick="clicked_earth()"></button></div>
+					<div id="dest_2"><button class="button_moon" name="button_moon" onclick="clicked_moon()"></button></div>
+					<div id="dest_2"><button class="button_mars" name="button_mars" onclick="clicked_mars()"></button></div>
+				</div>
+
+				<div id="block_form1">
+					<table style="border-spacing: 25px 0;">
+
+						<tr>
+							<th height="40px">
+								<div class="group">
+									<input id="Name" type="text" required>
+									<span class="highlight"></span>
+									<span class="bar"></span>
+									<label>Mission Name:</label>
+								</div>
+							</th>
+
+
+							<th height="40px">
+								<div class="group">
+									<input id="Goal" type="text" required>
+									<span class="highlight"></span>
+									<span class="bar"></span>
+									<label>Overall Mission Goal:</label>
+								</div>
+							</th>
+
+						</tr>
+
+						<tr>
+							<th height="40px">
+								<div class="group">
+									<input id="Crewnumber" type="text" required>
+									<span class="highlight"></span>
+									<span class="bar"></span>
+									<label>Number of Crewmembers:</label>
+								</div>
+							</th>
+
+							<th height="40px">
+								<select id="Duration">
+									<option selected="true" disabled="disabled" hidden="true">Select Duration</option>
+									<option  value="short" >Short - 14 days</option>
+									<option  value="medium" >Medium - 30 days</option>
+									<option  value="long" >Long - 180 days</option>
+								</select>
+							</th>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<button class="button_custom_na" name="button_custom_na" onclick=""></button><button class="button_save" name="button_save" onclick="location.href='#3';"></button>
+
+		</div>
+
+		<!-- <div class="slide" id="slide2">
+			<button class="button_back" name="button_back" onclick="location.href='#2';"></button><button class="button_save" name="button_save" onclick="location.href='#3';"></button>
+		</div> -->
+
+
+	</div>
+
+	<div class="section" id="spacecraft" >
+		<div class="slide" id="slide1">
+
+			<div class="intro">
+				<h1>Design Your Spacecraft</h1>
+	      <p>The spacecraft design sets the internal environment in which the astronauts directly interface. These design choices </p>
+			</div>
+
+			<div id="block_form1">
+
+				<table style="border-spacing: 5px 0;">
+
+					<tr width="360px">
+						<th height="60px" width="120px">
+							<button class="button_apollo" name="button_apollo" onclick="clicked_apollo()"></button>
+						</th>
+
+
+						<th height="60px" width="120px">
+							<button class="button_shuttle" name="button_shuttle" onclick="clicked_shuttle()"></button>
+						</th>
+
+						<th height="60px" width="120px">
+							<button class="button_iss" name="button_iss" onclick="clicked_iss()"></button>
+						</th>
+
+					</tr>
+
+					<tr width="120px">
+						<th height="50px" width="120px">
+							<h2>Apollo Class</h2>
+							<p>10 cubic meters</p>
+						</th>
+
+						<th height="50px" width="120px">
+							<h2>Shuttle Class</h2>
+							<p>100 cubic meters</p>
+						</th>
+
+						<th height="50px" width="120px">
+							<h2>ISS Class</h2>
+							<p>1000 cubic meters</p>
+						</th>
+
+					</tr>
+
+				</table>
+
+				<button class="button_custom" name="button_custom" onclick="location.href='#3/1';"></button><button class="button_save" name="button_save" onclick="location.href='#4';"></button>
+
+			</div>
+
+		</div>
+
+		<div class="slide" id="slide2">
+
+			<div class="intro">
+
+				<h1>Customizable Parameters</h1>
+				<p>Pending phase 2 funding, we will be enabling the following options:</p>
+
+				<div id="block_form2">
+					<div id="subblock_form2">
+
+						<table>
+
+							<tr><td height="38px" width="190px">
+								<select id="Food Quantity and Nutrition">
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Water Quantity">
+								</select>
+							</td></tr>
+
+							<!-- SPACECRAFT DESIGN SECTION -->
+
+							<tr><td height="38px" width="190px">
+								<select id="Access to Work Items">
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Air Flow System">
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Arrangement of Functional Areas">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Atmosphere Revitalization (humidity, particulate, toxin, & CO2 removal)">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Atmospheric Revitalization System (constituents)">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+						</table>
+
+					</div>
+					<div id="subblock_form2">
+
+						<table>
+
+							<tr><td height="38px" width="190px">
+								<select name="craft" id="craft">
+									<option selected="true" disabled="disabled" hidden="true">Spacecraft Geometry</option>
+									<option value="Cylindrical">Cylindrical</option>
+									<option value="Capsule">Capsule</option>
+									<option value="Winged">Winged</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Atmospheric Revitalization System (maintain pressure)">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Hatches">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Medical Care">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<!-- MEDIUM DESIGN CHOICES -->
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Personal Items">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Lighting (Ambient)">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+						</table>
+
+					</div>
+
+					<div id="subblock_form2">
+
+						<table>
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Private Space">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Recreation/Personal Activities">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Availability of Windows">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+
+							<tr><td height="38px" width="190px">
+								<select id="Caution & Warning Functionality">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Clothing">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Control Panels/Input Devices">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Countermeasure Hardware">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+						</table>
+					</div>
+				</div>
+
+				<br>
+				<br>
+
+				<button class="button_back" name="button_back" onclick="location.href='#3';"></button><button class="button_next" name="button_next" onclick="location.href='#3/2';"></button>
+
+
+			</div>
+
+
+		</div>
+
+		<div class="slide" id="slide3">
+
+			<div class="intro">
+
+				<div id="block_form2">
+
+					<div id="subblock_form2">
+
+						<table>
+
+							<tr><td height="38px" width="190px">
+								<select id="Decor of Environment">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Food System">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Habitable Volume">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Heating/Cooling System">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Hygiene Support">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Information Displays/Decision Aids">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Information Management Support">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Inventory Management Capability">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+
+
+
+
+						</table>
+
+
+					</div>
+					<div id="subblock_form2">
+
+						<table>
+
+							<tr><td height="38px" width="190px">
+								<select id="Mobility Aids & Restraints Availability & Quality">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Noise Reduction Systems">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Oxygen Management System">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Presence of Location Aids">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Situation-Specific Lighting">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Sleep Accommodation">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Stowage">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Suit Design">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+
+
+						</table>
+
+
+					</div>
+					<div id="subblock_form2">
+
+						<table>
+
+
+
+							<tr><td height="38px" width="190px">
+								<select id="Trash Management">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Water Management">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Cleanliness of Environment">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Confinement">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Hardware Tool Availability">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Level of Sensory Stimulation">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Safety Accommodations">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+							<tr><td height="38px" width="190px">
+								<select id="Support of Traffic Flow, Translation Paths">
+									<option selected="true" disabled="disabled" hidden="true">Select Destination</option>
+								</select>
+							</td></tr>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<br>
+			<br>
+			<br>
+
+			<button class="button_back" name="button_back" onclick="location.href='#3/1';"></button><button class="button_done" name="button_done" onclick="location.href='#3';"></button>
+
+		</div>
+
+	</div>
+
+
+
+  <div class="section" id="tasks" >
+
+		<div class="slide" id="slide1">
+
+			<div class="intro">
+				<h1>Task Profile</h1>
+				<p>This is a summary of what mission overview entails or why its important or something else important. </p>
+
+				<div id="block_form1">
+
+					<table style="border-spacing: 25px 0;">
+
+						<tr>
+							<th height="80px">
+								<button class="button_light" name="button_light" onclick="clicked_light()"></button>
+							</th>
+
+
+							<th height="80px">
+								<button class="button_moderate" name="button_moderate" onclick="clicked_moderate()"></button>
+							</th>
+
+							<th height="80px">
+								<button class="button_heavy" name="button_heavy" onclick="clicked_heavy()"></button>
+							</th>
+
+						</tr>
+
+						<tr>
+							<th height="80px">
+								<h2>Light</h2>
+								<p>Research from within craft</p>
+							</th>
+
+							<th height="80px">
+								<h2>Moderate</h2>
+								<p>Manual craft piloting and external research</p>
+							</th>
+
+							<th height="80px">
+								<h2>Heavy</h2>
+								<p>In-space assembly and repair</p>
+							</th>
+
+						</tr>
+
+
+					</table>
+
+					<button class="button_custom_na" name="button_custom_na" onclick=""></button><button class="button_save" name="button_save" onclick="location.href='#5';"></button>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="slide" id="slide2">
+			<button class="button_back" name="button_back" onclick="location.href='#4';"></button><button class="button_save" name="button_save" onclick="location.href='#5';"></button>
+		</div> -->
+
+  </div>
+
+  <div class="section" id="result" >
+
+		<div class="slide" id="slide1">
+
+			<div class="intro">
+				<h1>Mission Summary</h1>
+				<p>This summarizes the mission, spacecraft design, and task list.</p>
+
+				<div id="header_BC">
+					<header></header>
+				</div>
+
+				<div id="container_B">
+					<div id="subhead_BC"><h2>Mission Definition</h2>
+						<br>
+					</div>
+					<div id="block_BC1">
+						<p>Mission Name: Enteprise</p>
+						<p>Destination: Moon</p>
+						<p>Duration: 14 Days</p>
+						<p>Number of Crew: 3</p>
+					</div>
+				</div>
+
+				<div id="line_BC"></div>
+
+				<div id="container_C">
+					<div id="subhead_BC"><h2>Spacecraft Design</h2></div>
+					<div id="block_B2">Shuttle Class</div>
+					<div id="subhead_BC"><h2>Tasking</h2></div>
+					<div id="block_C2">High Workload</div>
+				</div>
+
+			</div>
+
+			<button class="button_run" name="button_run" onclick="location.href='#5/1';get_selections()">
+
+		</div>
+
+
+		<div class="slide" id="slide2">
+
+			<div class="intro">
+				<h1>Mission Summary</h1>
+				<p>Below is a summary of the model's output for your selections.</p>
+			</div>
+			<div id="block_A1"><img src="../assets/incomplete.png"></img></div>
+			<button class="button_reset" name="button_reset" onclick="location.href='#1'"><button class="button_share" name="button_share" onclick="location.href='https://tsrco.com/feedback/';">
+
+		</div>
+
+  </div>
+
+
+</div>
+
+<body onload="getStarted();">
+
+<script src="../scripts/tsrco.js"></script>
+
+
+
+
+</body>
+</html>
